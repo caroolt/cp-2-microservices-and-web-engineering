@@ -29,6 +29,8 @@ jobs:
           changelog-types: |
             feat: Features
             fix: Bug Fixes
+            bugfix: Bug Fixes
+            chore: Maintenance
             docs: Documentation
             style: Styles
             refactor: Code Refactoring
@@ -36,6 +38,7 @@ jobs:
             test: Tests
             build: Build System
             ci: Continuous Integration
+            hotfix: Hotfixes
           extra-files: |
             README.md
             docker-compose.yaml
