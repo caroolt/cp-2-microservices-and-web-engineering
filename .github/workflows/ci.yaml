@@ -6,6 +6,11 @@ on:
       - develop
       - feature/**
       - hotfix
+      - fix/**
+      - test/**
+      - bugfix/**
+      - chore/**
+      - docs/**
 
 jobs:
     build:
