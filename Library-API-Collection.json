@@ -1,0 +1,340 @@
+{
+  "info": {
+    "name": "Library Management System API",
+    "description": "Coleção completa para testar a API de gestão de biblioteca",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authors",
+      "item": [
+        {
+          "name": "Create Author",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Machado de Assis\",\n  \"birthDate\": \"1839-06-21\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/authors",
+              "host": ["{{base_url}}"],
+              "path": ["authors"]
+            }
+          }
+        },
+        {
+          "name": "Get All Authors",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/authors",
+              "host": ["{{base_url}}"],
+              "path": ["authors"]
+            }
+          }
+        },
+        {
+          "name": "Get Author by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/authors/1",
+              "host": ["{{base_url}}"],
+              "path": ["authors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Author",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Machado de Assis Atualizado\",\n  \"birthDate\": \"1839-06-21\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/authors/1",
+              "host": ["{{base_url}}"],
+              "path": ["authors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Author",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/authors/1",
+              "host": ["{{base_url}}"],
+              "path": ["authors", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Create Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Dom Casmurro\",\n  \"description\": \"Romance clássico da literatura brasileira\",\n  \"authorId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/books",
+              "host": ["{{base_url}}"],
+              "path": ["books"]
+            }
+          }
+        },
+        {
+          "name": "Get All Books",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/books",
+              "host": ["{{base_url}}"],
+              "path": ["books"]
+            }
+          }
+        },
+        {
+          "name": "Get Book by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/books/1",
+              "host": ["{{base_url}}"],
+              "path": ["books", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Book",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Dom Casmurro - Edição Especial\",\n  \"description\": \"Romance clássico atualizado\",\n  \"authorId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/books/1",
+              "host": ["{{base_url}}"],
+              "path": ["books", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Book",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/books/1",
+              "host": ["{{base_url}}"],
+              "path": ["books", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Loans",
+      "item": [
+        {
+          "name": "Create Loan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"borrowerName\": \"João Silva\",\n  \"loanDate\": \"2024-01-15\",\n  \"returnDate\": \"2024-02-15\",\n  \"bookId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/loans",
+              "host": ["{{base_url}}"],
+              "path": ["loans"]
+            }
+          }
+        },
+        {
+          "name": "Get All Loans",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/loans",
+              "host": ["{{base_url}}"],
+              "path": ["loans"]
+            }
+          }
+        },
+        {
+          "name": "Get Loan by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/loans/1",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Loan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"borrowerName\": \"João Silva Santos\",\n  \"loanDate\": \"2024-01-15\",\n  \"returnDate\": \"2024-03-15\",\n  \"bookId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/loans/1",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Loan",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/loans/1",
+              "host": ["{{base_url}}"],
+              "path": ["loans", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Test Scenarios",
+      "item": [
+        {
+          "name": "Complete Flow Test",
+          "item": [
+            {
+              "name": "1. Create Author",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"José de Alencar\",\n  \"birthDate\": \"1829-05-01\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/authors",
+                  "host": ["{{base_url}}"],
+                  "path": ["authors"]
+                }
+              }
+            },
+            {
+              "name": "2. Create Book",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"O Guarani\",\n  \"description\": \"Romance indianista\",\n  \"authorId\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/books",
+                  "host": ["{{base_url}}"],
+                  "path": ["books"]
+                }
+              }
+            },
+            {
+              "name": "3. Create Loan",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"borrowerName\": \"Maria Santos\",\n  \"loanDate\": \"2024-01-20\",\n  \"returnDate\": \"2024-02-20\",\n  \"bookId\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/loans",
+                  "host": ["{{base_url}}"],
+                  "path": ["loans"]
+                }
+              }
+            },
+            {
+              "name": "4. List All Data",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{base_url}}/authors",
+                  "host": ["{{base_url}}"],
+                  "path": ["authors"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}

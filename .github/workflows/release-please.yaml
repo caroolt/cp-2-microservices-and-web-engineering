@@ -1,0 +1,42 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+
+      - name: Release Please
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          release-type: maven
+          package-name: library-management-system
+          changelog-types: |
+            feat: Features
+            fix: Bug Fixes
+            docs: Documentation
+            style: Styles
+            refactor: Code Refactoring
+            perf: Performance Improvements
+            test: Tests
+            build: Build System
+            ci: Continuous Integration
+          extra-files: |
+            README.md
+            docker-compose.yaml
+            Dockerfile
