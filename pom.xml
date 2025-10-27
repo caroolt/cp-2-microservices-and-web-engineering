@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.caroolt</groupId>
 	<artifactId>library-management-system</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>library-management-system</name>
 	<description>Library Management System - Java - CP2 2SEM 3SIR</description>
 	<url/>
