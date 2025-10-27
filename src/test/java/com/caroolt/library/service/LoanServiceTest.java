@@ -70,7 +70,7 @@ class LoanServiceTest {
         when(bookRepository.findById(2L)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> loanService.createLoan(dto));
-        assertEquals("Inexistent Book - ID: 2", exception.getMessage());
+        assertEquals("Livro inexistente - ID: 2", exception.getMessage());
     }
 
     @Test
@@ -95,7 +95,7 @@ class LoanServiceTest {
 
     @Test
     void deleteLoan_Success() {
-        when(loanRepository.findById(1L)).thenReturn(Optional.of(loan));
+        when(loanRepository.existsById(1L)).thenReturn(true);
 
         Boolean result = loanService.deleteLoan(1L);
 
@@ -105,7 +105,7 @@ class LoanServiceTest {
 
     @Test
     void deleteLoan_NotFound() {
-        when(loanRepository.findById(1L)).thenReturn(Optional.empty());
+        when(loanRepository.existsById(1L)).thenReturn(false);
 
         Boolean result = loanService.deleteLoan(1L);
 
@@ -137,6 +137,6 @@ class LoanServiceTest {
         when(bookRepository.findById(2L)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> loanService.updateLoan(1L, dto));
-        assertEquals("Inexistent Book! ID: ", exception.getMessage());
+        assertEquals("Livro inexistente! ID: 2", exception.getMessage());
     }
 }

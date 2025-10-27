@@ -71,7 +71,7 @@ class BookServiceTest {
         when(authorRepository.findById(2L)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> bookService.createBook(dto));
-        assertEquals("Inexistent Author - ID: 2", exception.getMessage());
+        assertEquals("Autor inexistente - ID: 2", exception.getMessage());
     }
 
     @Test
@@ -96,7 +96,7 @@ class BookServiceTest {
 
     @Test
     void deleteBook_Success() {
-        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+        when(bookRepository.existsById(1L)).thenReturn(true);
 
         Boolean result = bookService.deleteBook(1L);
 
@@ -106,7 +106,7 @@ class BookServiceTest {
 
     @Test
     void deleteBook_NotFound() {
-        when(bookRepository.findById(1L)).thenReturn(Optional.empty());
+        when(bookRepository.existsById(1L)).thenReturn(false);
 
         Boolean result = bookService.deleteBook(1L);
 

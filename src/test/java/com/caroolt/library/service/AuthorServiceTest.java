@@ -80,8 +80,7 @@ class AuthorServiceTest {
     @Test
     void deveDeletarAutorQuandoExistir() {
         Long id = 1L;
-        Author autor = new Author();
-        when(authorRepository.findById(id)).thenReturn(Optional.of(autor));
+        when(authorRepository.existsById(id)).thenReturn(true);
 
         Boolean resultado = authorService.deleteAuthor(id);
 
@@ -92,7 +91,7 @@ class AuthorServiceTest {
     @Test
     void naoDeveDeletarAutorQuandoNaoExistir() {
         Long id = 1L;
-        when(authorRepository.findById(id)).thenReturn(Optional.empty());
+        when(authorRepository.existsById(id)).thenReturn(false);
 
         Boolean resultado = authorService.deleteAuthor(id);
 
