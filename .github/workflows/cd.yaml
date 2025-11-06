@@ -22,6 +22,7 @@ jobs:
             -   name: Testes Integrados
                 run: |
                     docker compose up -d
+                    chmod +x ./server/run_integrated_tests.sh
                     ./server/run_integrated_tests.sh
 
             -   name: Build and push
