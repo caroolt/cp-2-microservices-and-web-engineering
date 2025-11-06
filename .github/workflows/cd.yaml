@@ -3,15 +3,15 @@ name: Continuous Delivery
 on:
   pull_request:
     branches:
-      - main
+      - develop
+      - main   
 
 jobs:
-    build-and-push:
+    build_and_push:
         runs-on: ubuntu-latest
-        
-        steps: 
-            - name: Checkout
-              uses: actions/checkout@v5
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v5
 
             - name: DockerHub Login
               uses: docker/login-action@v3
@@ -19,8 +19,13 @@ jobs:
                 username: ${{ vars.DOCKERHUB_USERNAME }}
                 password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            - name: Image Build
-              run: docker build -t caroolt/cp-2-microservices-and-web-engineering:latest .
+            -   name: Testes Integrados
+                run: |
+                    docker compose up -d
+                    ./server/run_integrated_tests.sh
 
-            - name: Image Push DockerHub
-              run: docker push caroolt/cp-2-microservices-and-web-engineering:latest
+            -   name: Build and push
+                uses: docker/build-push-action@v6
+                with:
+                    push: true
+                    tags: caroolt/cp-2-microservices-and-web-engineering:latest

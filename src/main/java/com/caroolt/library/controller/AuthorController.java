@@ -23,7 +23,7 @@ import com.caroolt.library.service.AuthorService;
  * da biblioteca digital.
  */
 @RestController
-@RequestMapping("/authors")
+@RequestMapping("/api/${api.version}/authors")
 public class AuthorController {
     
     @Autowired
