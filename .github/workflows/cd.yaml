@@ -22,8 +22,13 @@ jobs:
             -   name: Testes Integrados
                 run: |
                     docker compose up -d
-                    chmod +x ./server/run_integrated_tests.sh
-                    ./server/run_integrated_tests.sh
+                    sleep 30
+                    docker run --rm \
+                      --network cp-2-microservices-and-web-engineering_app-networks \
+                      -v ${{ github.workspace }}/server:/server \
+                      -w /server \
+                      ubuntu:latest \
+                      bash -c "apt update && apt install -y curl jq && bash run_integrated_tests.sh"
 
             -   name: Build and push
                 uses: docker/build-push-action@v6
