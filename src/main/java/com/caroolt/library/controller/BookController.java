@@ -23,7 +23,7 @@ import com.caroolt.library.service.BookService;
  * do acervo da biblioteca.
  */
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/${api.version}/books")
 public class BookController {
     
     @Autowired
