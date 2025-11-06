@@ -5,10 +5,15 @@ set -e
 apt update
 apt install -y jq
 
+# Determinar o host da API (api se estiver na mesma rede Docker, localhost se não)
+API_HOST=${API_HOST:-api}
+API_PORT=${API_PORT:-8080}
+API_URL="http://${API_HOST}:${API_PORT}"
+
 # Criar Autor (necessário para criar livro)
 HTTP_STATUS=$(
     curl -X 'POST' \
-    'http://localhost:8080/api/v2/authors' \
+    "${API_URL}/api/v2/authors" \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
     -w "%{http_code}" \
@@ -29,7 +34,7 @@ AUTHOR_ID=$(jq '.id' author_create.json)
 # POST - Criar Livro
 HTTP_STATUS=$(
     curl -X 'POST' \
-    'http://localhost:8080/api/v2/books' \
+    "${API_URL}/api/v2/books" \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
     -w "%{http_code}" \
@@ -51,7 +56,7 @@ BOOK_ID=$(jq '.id' book_create.json)
 echo "Livro criado com ID: $BOOK_ID"
 
 # GET - Buscar Livro por ID
-HTTP_STATUS=$(curl -X GET "http://localhost:8080/api/v2/books/$BOOK_ID" -o book_get.json -w "%{http_code}" -H 'accept: */*')
+HTTP_STATUS=$(curl -X GET "${API_URL}/api/v2/books/$BOOK_ID" -o book_get.json -w "%{http_code}" -H 'accept: */*')
 echo "Status HTTP: $HTTP_STATUS"
 if [ "$HTTP_STATUS" -ne 200 ]; then
     echo "Erro ao buscar livro"
@@ -61,7 +66,7 @@ fi
 # PUT - Atualizar Livro
 HTTP_STATUS=$(
     curl -X 'PUT' \
-    "http://localhost:8080/api/v2/books/$BOOK_ID" \
+    "${API_URL}/api/v2/books/$BOOK_ID" \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
     -w "%{http_code}" \
@@ -79,7 +84,7 @@ if [ "$HTTP_STATUS" -ne 200 ]; then
 fi
 
 # GET - Listar todos os livros
-HTTP_STATUS=$(curl -X GET 'http://localhost:8080/api/v2/books' -o book_list.json -w "%{http_code}" -H 'accept: */*')
+HTTP_STATUS=$(curl -X GET "${API_URL}/api/v2/books" -o book_list.json -w "%{http_code}" -H 'accept: */*')
 echo "Status HTTP: $HTTP_STATUS"
 if [ "$HTTP_STATUS" -ne 200 ]; then
     echo "Erro ao listar livros"
@@ -89,7 +94,7 @@ fi
 # DELETE - Deletar Livro
 HTTP_STATUS=$(
     curl -X 'DELETE' \
-    "http://localhost:8080/api/v2/books/$BOOK_ID" \
+    "${API_URL}/api/v2/books/$BOOK_ID" \
     -H 'accept: */*' \
     -w "%{http_code}"
 )
