@@ -17,7 +17,7 @@ services:
       start_period: 30s
 
   api:
-    image: caroolt/cp-2-microservices-and-web-engineering:latest
+    build: .
     depends_on:
       db:
         condition: service_healthy

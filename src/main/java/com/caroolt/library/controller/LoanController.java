@@ -23,7 +23,7 @@ import com.caroolt.library.service.LoanService;
  * de livros da biblioteca.
  */
 @RestController
-@RequestMapping("/loans")
+@RequestMapping("/api/${api.version}/loans")
 public class LoanController {
     
     @Autowired

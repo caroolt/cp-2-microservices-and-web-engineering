@@ -190,5 +190,42 @@ curl -X POST http://localhost:8080/books \
   }'
 ```
 
+## 🔍 Decisões Técnicas e Notas de Implementação
+
+### Testes Integrados no Workflow CD
+
+**Decisão:** Os testes integrados são executados dentro de um container Docker Ubuntu temporário ao invés de diretamente no runner do GitHub Actions.
+
+**Motivo:** 
+- O script de testes usa `apt` para instalar `curl` e `jq`, que requer permissões de root
+- Executar diretamente no runner causava erro: `Permission denied` ao tentar usar `apt`
+- Executar dentro de um container Docker garante um ambiente isolado e com as permissões necessárias
+
+**Implementação:**
+```yaml
+docker run --rm \
+  --network cp-2-microservices-and-web-engineering_app-networks \
+  -v ${{ github.workspace }}/server:/server \
+  -w /server \
+  ubuntu:latest \
+  bash -c "apt update && apt install -y curl jq && bash run_integrated_tests.sh"
+```
+
+### Uso do Nome do Serviço Docker ao Invés de localhost
+
+**Decisão:** O script de testes integrados usa `http://api:8080` ao invés de `http://localhost:8080` para acessar a API.
+
+**Motivo:**
+- Quando executado dentro da rede Docker (`app-networks`), o container temporário não consegue acessar `localhost:8080`
+- Dentro da mesma rede Docker, os serviços se comunicam pelo nome do serviço definido no `docker-compose.yaml`
+- O serviço da API está nomeado como `api` no docker-compose, então usamos `api:8080`
+
+**Implementação:**
+```bash
+# O script detecta automaticamente o ambiente
+API_HOST=${API_HOST:-api}  # Usa 'api' por padrão (nome do serviço Docker)
+API_URL="http://${API_HOST}:${API_PORT}"
+```
+
 ## 📄 Licença
 Este projeto foi desenvolvido como parte do Checkpoint 2 do curso de Microservices and Web Engineering.
